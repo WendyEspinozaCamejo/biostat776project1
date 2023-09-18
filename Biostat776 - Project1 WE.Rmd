@@ -6,7 +6,7 @@ output:
   html_document: default
   pdf_document: default
 ---
-My website: ""
+My website: "https://wendyespinozacamejo.github.io/Statcomputing/biostat776project1/Biostat776---Project1-WE/"
 ```{r setup, include=FALSE}
 library("here")
 library("tidyverse")
