@@ -2,9 +2,11 @@
 title: "Biostat776 - Project1 WE"
 author: "Wendy Camejo Nunez"
 date: "2023-09-15"
-output: html_document
+output:
+  html_document: default
+  pdf_document: default
 ---
-
+My website: ""
 ```{r setup, include=FALSE}
 library("here")
 library("tidyverse")
@@ -45,7 +47,7 @@ qplot(rating, data = chocolate, bins=20)
 qplot(rating, data = chocolate, bins=25)
 ```
 
-I would choose 15 the other options make the I dont know
+I would choose 15 or 20 for the bin value since it makes the plot looks nicer, appealing to a audience. When the bin equals to 10, the width of the bars are to wider and when the bin equals to 25, the width of the bars are too narrow
 
 2.Consider the countries where the beans originated from. How many reviews come from each country of bean origin?
 ```{r}
@@ -222,14 +224,18 @@ glimpse(data_7)
 ```
 4.Convert this wide dataset into a long dataset with a new feature and mean_score column.
 ```{r}
-
+data_7.1 <- data_7 %>% pivot_longer(-review_date, names_to = "feature", values_to = "mean_score")
+glimpse(data_7.1)
 ```
 
 ## Part 4: Data visualization
 Use the functions in ggplot2 package to make a scatter plot of the mean_scores (y-axis) over time (x-axis). One point for each mean_score. For full credit, your plot should include:
 ```{r}
-
+data_7.1 %>% 
+  ggplot(aes(x=review_date, y=mean_score)) + geom_point(pch= 1) +geom_smooth(color = "blue", linewidth = 1, se = FALSE, method = "gam", formula = y ~s(x)) +labs(title = "Chocolate Review Date",subtitle = "Mean score of the features tested in this study shows no signinficant difference accros review date", x= "Review Date", y="Mean Score", caption = "Wendy Espinoza")
+  
 ```
+
 ## Part 5: Make the worst plot you can!
 Using the chocolate dataset (or any of the modified versions you made throughout this assignment or anything else you wish you build upon it):
 ```{r}
@@ -239,13 +245,13 @@ Using the chocolate dataset (or any of the modified versions you made throughout
 labs(title = "The begining of the World", x="x", y="y")+ geom_boxplot()+ geom_point(aes(colour = "red")) + geom_smooth()
   
 ```
--I choose the ggplot that I made in question 1.2 showing country_of_bean_origin and Number_reviews.
-- I changed the angle, vjust and hjust for the x-axis which makes it impossible to read its content.
-- I added a title that it is unrelated to content of the plot using the function labs().
-- I changed the names of the x- and y-axis for "x" and "y" using the function lab() which doesn't provide any information.
-- I changed the plot from a geom_bar() to geom_boxplot which makes each of the points to have bar coming out of it.
-- I changed the color of the point using geom_point() with astetic funtion from balck to red
-_ I changed the position of the legend from the rigth side to the top.
+1. I choose the ggplot that I made in question 1.2 showing country_of_bean_origin and Number_reviews.
+2. I changed the angle, vjust and hjust for the x-axis which makes it impossible to read its content.
+3.I added a title that it is unrelated to content of the plot using the function labs().
+4. I changed the names of the x- and y-axis for "x" and "y" using the function lab() which doesn't provide any information.
+5. I changed the plot from a geom_bar() to geom_boxplot which makes each of the points to have bar coming out of it.
+6. I changed the color of the point using geom_point() with aesthetic function from black to red
+7. I changed the position of the legend from the right side to the top.
 
 ## Part 6: Make my plot a better plot
 The goal is to take my sad looking plot and make it better! If you’d like an example, here is a tweet I came across of someone who gave a talk about how to zhoosh up your ggplots.
@@ -259,15 +265,18 @@ theme(axis.text.x = element_text(angle = 90,size =12, colour = "black", vjust = 
 axis.title.y = element_text(size = 12, face = "bold"), legend.title = element_text(size = 12, face = "bold"), 
         legend.text = element_text(size = 12, face = "bold", colour = "dark blue"), 
         axis.text.y = element_text(colour = "black", size = 12, face = "bold")) +
-    geom_violin()+ geom_boxplot(width= .1, fill= "gray") +labs(title = "Chocolate Review Date",subtitle = "2020 and 2021 have the overall highest reviews since 2006", x= "Review Date", y="Rating")
+    geom_violin()+ geom_boxplot(width= .1, fill= "gray") +labs(title = "Chocolate Review Date",subtitle = "2020 and 2021 have the overall highest rating since 2006", x= "Review Date", y="Rating")
 
 ```
-- Added a title to the graph using the function labs(title)
-- Added a subtitle to give the main results of the graph using the function labs(subtitle)
-- Change the x-axis title form "as.factor(review_date)" to "Review Date" 
-- Change the axis and legend font to size to 12 and made it bold to be more clear for readers using the function theme().
-- Change the color of the numbers inside of the legend to make the graph more appealing to readers using the function legend.text
-- Change the date in x-axis from horizontal position to vertical position to have more space between each other using element_text(angle = 90)inside of the theme function.
-- Added geom_boxplot() in color gray to help visualize the median of the plot.
+1. Added a title to the graph using the function labs(title)
+2. Added a subtitle to give the main results of the graph using the function labs(subtitle)
+3.  Change the x-axis title form "as.factor(review_date)" to "Review Date" 
+4. Change the axis and legend font to size to 12 and made it bold to be more clear for readers using the function theme().
+5. Change the color of the numbers inside of the legend to make the graph more appealing to readers using the function legend.text
+6. Change the date in x-axis from horizontal position to vertical position to have more space between each other using element_text(angle = 90)inside of the theme function.
+7. Added geom_boxplot() in color gray to help visualize the median of the plot.
+```{r}
+sessioninfo::session_info()
+```
 
 
